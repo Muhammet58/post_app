@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}post_detayı{% endblock %}
+
+{% block content %}
+{% include 'partials/_navbar.html' %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-success border-1 text-bg-dark mt-2">
+                <div class="card-body"">
+                    <h2 class="card-title" style="color: #dc3545; text-align: center;">-- {{ post.title }} --</h2>
+                    <hr color="white">
+                    <ul class="color-white">  
+                        <li class="card-text" style="font-size: larger; list-style-type: none; text-decoration: none; list-style: outside;">&nbsp;{{ post.text|safe }}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

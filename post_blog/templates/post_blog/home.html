@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_file %}
+<link rel="stylesheet" href="{% static 'home.css' %}"> {% endblock %}
+
+{% block title %}Ana_Sayfa{% endblock %}
+
+
+{% block content %}
+
+{% include 'partials/_navbar.html' %}
+
+
+
+<table class="table table-striped table-bordered border-light table-dark">
+    <thead class="table-dark">
+        <tr>
+            <th>BAŞLIK</th>
+            <th>İÇERİK</th>
+            <th>YAYINLAMA</th>
+            <th>PUANLAMA</th>
+            <th>DÜZENLE</th>
+            <th>SİL</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+        {% if post_model|length > 0 %}
+        {% for model in post_model %}
+        <tr>
+            <td>{{ model.title }}</td>
+            <td><a style="color: #dc3545;" href="{% url 'post_details' model.id model.slug %}">açıklamalar
+                    için tıklayın</a></td>
+            <td>{{ model.publish_date }}</td>
+
+            <td>
+
+                <span id="likeCount" style="font-size: 25px;">0</span>
+                <i id="likeIcon" onclick="like()" class="fa fa-thumbs-up like-icon"
+                    style="font-size: 25px; position: fixed; margin-left: 10px; margin-top: 5px;"></i>
+
+                <span id="dislikeCount" style="font-size: 25px; position: fixed; margin-left: 85px; ;">0</span>
+                <i id="dislikeIcon" onclick="dislike()" class="fa fa-thumbs-down dislike-icon"
+                    style="font-size: 25px; position: fixed; margin-left: 110px; margin-top: 10px;"></i>
+
+            </td>
+
+            <form action="{% url 'edit_post' model.slug %}" method="POST" id="silForm">
+                {% csrf_token %}
+                <td><button class="btn btn-outline-danger btn-sm">Düzenle</button></td>
+            </form>
+
+            <form action="{% url 'delete' model.id %}" method="POST" id="silForm">
+                {% csrf_token %}
+                <td><button class="btn btn-outline-danger btn-sm" onclick="onayMesajiGoster(event)">Sil</button></td>
+            </form>
+
+            {% endfor %}
+            {% else %}
+
+            <td colspan="6">
+                <div class="alert aler-muted" role="alert" style="text-align: center; font-weight: 600; color: white;">
+                    Şuan için bir gönderi yok !</div>
+            </td>
+        </tr>
+        {% endif %}
+    </tbody>
+</table>
+
+{% block js_file %}
+<script src="{% static 'home.js' %}"></script> {% endblock %}
+
+{% endblock %}

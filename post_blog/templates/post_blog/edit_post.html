@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}edit_post{% endblock %}
+
+{% block css_file %}<link rel="stylesheet" href="{% static 'post_blog.css' %}">{% endblock %}
+
+{% block content %}
+{% include 'partials/_navbar.html' %}
+
+<div class="container">
+    <form method="post" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="d-grid gap-2 col-6 mx-auto mt-5">
+            <input type="submit"  class="btn btn-outline-success btn-lg">Kaydet</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

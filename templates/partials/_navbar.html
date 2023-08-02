@@ -1,0 +1,38 @@
+{% load static %}
+
+<nav class="navbar bg-success">
+    <div class="container-fluid">
+        <span class="navbar-brand my-auto">
+            <h1 style="color: white;"><img src="{% static 'image/post.png' %}" width="70">&nbsp;
+                Post App</h1>
+        </span>
+        <span class="navbar-brand mb-0 h1 ms-auto">
+            <button class="btn btn-outline-light btn-lg" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
+                MENU
+            </button>
+
+            <div class="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop"
+                aria-labelledby="staticBackdropLabel">
+                <div class="offcanvas-header bg-success">
+                    <h5 class="offcanvas-title" id="staticBackdropLabel" style="color: white;">Menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body bg-dark">
+                    <div>
+                        <ul>
+                            <li style="color: white;">
+                                <a style="text-decoration: none; color: #17a2b8;" href="{% url 'home' %}">Ana sayfa</a>
+                            </li>
+                            <br>
+                            <li style="color: white;">
+                                <a style="text-decoration: none; color: #17a2b8;"
+                                    href="{% url 'create_post_url' %}">Post oluştur</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </span>
+    </div>
+</nav>
