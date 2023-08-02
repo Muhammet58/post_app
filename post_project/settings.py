@@ -119,10 +119,9 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
-     '/home/Muhammety/muhammety.pythonanywhere.com/static/',
+    BASE_DIR / 'static',
 ]
 
-STATIC_ROOT = '/home/Muhammety/muhammety.pythonanywhere.com/collected_static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
