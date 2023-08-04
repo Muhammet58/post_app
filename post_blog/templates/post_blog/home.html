@@ -17,6 +17,7 @@
     <div class="row">
         <div class="col">
 
+            {% if post_model|length > 0 %}
             {% for model in post_model %}
 
             <div class="card">
@@ -38,7 +39,8 @@
 
                         <form action="{% url 'delete' model.id %}" method="POST">
                             {% csrf_token %}
-                            <input onclick="onayMesajiGoster(event)" class="btn btn-outline-danger" type="submit" value="Sil">
+                            <input onclick="onayMesajiGoster(event)" class="btn btn-outline-danger" type="submit"
+                                value="Sil">
                         </form>
 
                     </div>
@@ -58,11 +60,21 @@
                 </div>
             </div>
             <br>
+
             {% endfor %}
+            {% else %}
+
+
+            <div class="alert alert-muted" role="alert" style="text-align: center; font-weight: 600; color: white;">
+                Şuan için bir gönderi yok !</div>
+
+
+            {% endif %}
 
         </div>
     </div>
 </div>
 
-{% block js_file %} <script src="{% static 'js/home.js' %}"></script> {% endblock %}
+{% block js_file %}
+<script src="{% static 'js/home.js' %}"></script> {% endblock %}
 {% endblock %}
