@@ -1,7 +1,8 @@
-.liked {
-    color: blue; /* Like iconu için beğenilmiş durumu rengi */
+.like-icon.active {
+    color: blue; 
 }
 
-.disliked {
-    color: red; /* Dislike iconu için beğenilmemiş durumu rengi */
+.dislike-icon.active {
+    color: red; 
 }
+

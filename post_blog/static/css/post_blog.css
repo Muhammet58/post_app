@@ -11,8 +11,28 @@ input[type='text'] {
     font-size: larger;
 }
 
+label:hover {
+    color: #dc3545;
+    margin-top: 50px;
+    margin-bottom: 10px;
+    font-size: larger;
+}
+
+input[type='text']:hover {
+    border: 5px solid #dc3545;
+    border-radius: 20px;
+    font-size: larger;
+
+}
+
 .textarea {
     border: 5px dashed #28a745;
+    border-radius: 20px;
+    font-size: larger;
+}
+
+.textarea:hover {
+    border: 5px solid #dc3545;
     border-radius: 20px;
     font-size: larger;
 }

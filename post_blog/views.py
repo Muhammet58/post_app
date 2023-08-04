@@ -3,8 +3,10 @@ from .models import post_model
 from .forms import post_model_form
 
 def home_page(request):
+    post_models = post_model.objects.all()
+
     data = {
-        "post_model":post_model.objects.all()
+        "post_model": post_models,
     }
     return render(request, 'post_blog/home.html', data)
 

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 
 class post_model(models.Model):
+    author = models
     title = models.CharField(max_length=200)
     text = models.TextField()
     publish_date = models.DateTimeField(auto_now_add=True)

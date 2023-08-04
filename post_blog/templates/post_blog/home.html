@@ -23,6 +23,7 @@
                 <div class="card-header"> Gönderilen post </div>
                 <div class="card-body d-flex align-items-center">
                     <h5 class="flex-grow-1">{{ model.title }}</h5>
+
                     <div class="btn-group">
 
                         <form action="{% url 'post_details' model.id model.slug %}" method="POST">
@@ -37,22 +38,23 @@
 
                         <form action="{% url 'delete' model.id %}" method="POST">
                             {% csrf_token %}
-                            <input onclick="onayMesajiGoster(event)" type="submit" class="btn btn-outline-danger"
-                                value="Sil">
+                            <input onclick="onayMesajiGoster(event)" class="btn btn-outline-danger" type="submit" value="Sil">
                         </form>
 
                     </div>
+
                 </div>
                 <div class="card-footer">
                     {{ model.publish_date }}
 
 
-                    <span id="likeCount" style="font-size: 25px;">0</span>
-                    <i id="likeIcon" onclick="like()" class="fa fa-thumbs-up like-icon" style="font-size: 25px;"></i>
-
-                    <span id="dislikeCount" style="font-size: 25px;">0</span>
-                    <i id="dislikeIcon" onclick="dislike()" class="fa fa-thumbs-down dislike-icon"
+                    <span class="like-count" style="font-size: 25px;">0</span>
+                    <i id="likeIcon" onclick="toggleLike(this)" class="fa fa-thumbs-up like-icon" name='likebtn'
                         style="font-size: 25px;"></i>
+
+                    <span class="dislike-count" style="font-size: 25px;">0</span>
+                    <i id="dislikeIcon" onclick="toggleDislike(this)" class="fa fa-thumbs-down dislike-icon"
+                        style="font-size: 25px;" type='button'></i>
                 </div>
             </div>
             <br>
