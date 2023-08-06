@@ -27,7 +27,7 @@ def create_post_view(request):
     else:
         form = post_model_form()
 
-    return render(request, 'post_blog/create_post.html', {'form':form}, )
+    return render(request, 'post_blog/create_post.html', {'form':form, 'post':post_model}, )
 
 
 
@@ -43,7 +43,7 @@ def edit_post(request, post_slug):
     else:
         form = post_model_form(instance=post)
 
-    return render(request, 'post_blog/edit_post.html', {'form':form} )
+    return render(request, 'post_blog/edit_post.html', {'form':form})
 
 
 

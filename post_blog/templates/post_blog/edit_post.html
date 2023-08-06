@@ -3,18 +3,40 @@
 
 {% block title %}edit_post{% endblock %}
 
-{% block css_file %}<link rel="stylesheet" href="{% static 'css/post_blog.css' %}">{% endblock %}
+{% block css_file %}
+<link rel="stylesheet" href="{% static 'css/post_blog.css' %}">{% endblock %}
 
 {% block content %}
 {% include 'partials/_navbar.html' %}
 
 <div class="container">
-    <form method="post" class="form">
+    <form method="post" id="editForm">
         {% csrf_token %}
         {{ form.as_p }}
         <div class="d-grid gap-2 col-6 mx-auto mt-5">
-            <input type="submit"  class="btn btn-outline-success btn-lg">Kaydet</button>
+            <input type="button" class="btn btn-outline-success btn-lg" value="Gönder" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
         </div>
     </form>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h1 class="modal-title fs-5 " id="exampleModalLabel" style="color: white;">Post güncelleme işlemi
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="color: black; font-weight: 700;">
+                    Güncellemiş olduğunuz post'u göndermek istediğinizden emin misiniz ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hayır</button>
+                    <button type="submit" form="editForm" class="btn btn-danger">Evet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 {% endblock %}
