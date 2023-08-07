@@ -1,8 +1,10 @@
 function onayMesajiGoster(event) {
-    if (!confirm("Gönderiyi silmek istediğinizden emin misiniz ?")) {
+    if (!confirm("Hesaptan çıkmak istediğinizden emin misiniz ?")) {
         event.preventDefault(); /* Form submit işlemini iptal eder. */
     }
 }
+
+
 
 
 

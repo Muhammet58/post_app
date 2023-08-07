@@ -1,0 +1,20 @@
+.register_label {
+    color: #28a745;
+    font-weight: 500;
+    font-size: larger;
+    border-radius: ;
+}
+
+.register_label:hover {
+    color: #dc3545;
+}
+
+.input {
+    border: 5px dashed #28a745;
+    border-radius: 20px;
+    font-size: larger;
+}
+
+.input:hover {
+    border-color: #dc3545;
+}

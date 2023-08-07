@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css_file %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}""> {% endblock %}
+
+{% block title %}Kayıt_Ol{% endblock %}
+
+{% block content %}
+{% include 'partials/_navbar.html' %}
+
+<h2 class=" mt-4 ms-3" style="color: white;">Kayıt Formu</h2>
+<hr size="10" color="white">
+
+<div class="container mt-5">
+    <form method="post" id="registerForm">
+        {% csrf_token %}
+
+        {% if error %}
+        <div class="alert alert-muted" style="color: white; text-align: center; font-size: larger;">{{ error }}</div>
+        {% endif %}
+
+        <div class="row g-5">
+            <div class="col">
+                <label for="inputName" class="form-label register_label">Adınız :</label>
+                <input type="text" name="name" id="inputName" class="form-control input" autocomplete="off" value="{{name}}">
+            </div>
+
+            <div class="col">
+                <label for="inputName" class="form-label register_label">Soyadınız :</label>
+                <input type="text" name="surname" id="inputName" class="form-control input" autocomplete="off" value="{{surname}}">
+            </div>
+        </div>
+
+        <div class="row g-5 mt-2">
+            <div class="col">
+                <label for="inputName" class="form-label register_label">Kullanıcı adı :</label>
+                <input type="text" name="username" id="inputName" class="form-control input" autocomplete="off" value={{username}}>
+            </div>
+
+            <div class="col">
+                <label for="inputName" class="form-label register_label">E-posta :</label>
+                <input type="text" name="email" id="inputName" class="form-control input" autocomplete="off" value={{name}}>
+            </div>
+        </div>
+
+        <div class="row g-5 mt-2">
+            <div class="col">
+                <label for="inputName" class="form-label register_label">Parola :</label>
+                <input type="password" name="password" id="inputName" class="form-control input" autocomplete="off">
+            </div>
+
+            <div class="col">
+                <label for="inputName" class="form-label register_label">Parola tekrar :</label>
+                <input type="password" name="repassword" id="inputName" class="form-control input" autocomplete="off">
+            </div>
+        </div>
+
+    </form>
+
+
+    <div class="d-grid gap-2 col-6 mx-auto mt-5">
+        <button type="submit" class="btn btn-outline-success btn-lg" form="registerForm">Kayıt Ol</button>
+    </div>
+
+
+</div>
+{% endblock %}

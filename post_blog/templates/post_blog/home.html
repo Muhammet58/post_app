@@ -21,7 +21,7 @@
             {% for model in post_model %}
 
             <div class="card">
-                <div class="card-header"> Gönderilen post </div>
+                <div class="card-header"> {{ model.author }} kişisi tarafından gönderildi </div>
                 <div class="card-body d-flex align-items-center">
                     <h5 class="flex-grow-1">{{ model.title }}</h5>
 
@@ -32,9 +32,10 @@
                             <input class="btn btn-outline-primary" type="submit" value="İncele">
                         </form>
 
+                        {% if user.is_authenticated and user == model.author %}
                         <form action="{% url 'edit_post' model.slug %}" method="POST">
                             {% csrf_token %}
-                                <input class="btn btn-outline-success" type="submit" value="Güncelle">
+                            <input class="btn btn-outline-success" type="submit" value="Güncelle">
                         </form>
 
 
@@ -44,6 +45,7 @@
 
                             {% include 'partials/_deleteBtn_modal.html' %}
                         </div>
+                        {% endif %}
 
 
                     </div>

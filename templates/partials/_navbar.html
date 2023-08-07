@@ -1,4 +1,5 @@
 {% load static %}
+{% block css_file %}<link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock %}
 
 <nav class="navbar bg-success">
     <div class="container-fluid">
@@ -21,14 +22,50 @@
                 <div class="offcanvas-body bg-dark">
                     <div>
                         <ul>
-                            <li style="color: white;">
-                                <a style="text-decoration: none; color: #17a2b8;" href="{% url 'home' %}">Ana sayfa</a>
-                            </li>
+
+                            {% if user.is_authenticated %}
+
+
+                            <h4 style="color: #dc3545; list-style: none; left: 25px; position: absolute; top: 70px;">
+                                Hoşgeldin {{ user.username }}
+                            </h4>
+
+                            <br>
                             <br>
                             <li style="color: white;">
-                                <a style="text-decoration: none; color: #17a2b8;"
-                                    href="{% url 'create_post_url' %}">Post oluştur</a>
+                                <a class="hover" href="{% url 'home' %}">Ana sayfa</a>
                             </li>
+
+                            <br>
+                            <li style="color: white;">
+                                <a class="hover" href="{% url 'create_post_url' %}">Post oluştur</a>
+                            </li>
+
+                            <br>
+
+                            <li style="color: white;">
+                                <a class="hover" data-bs-target="#confirmModal" data-bs-toggle="modal">Hesaptan Çık</a>
+                            </li>
+
+                            {% else %}
+
+                            <br>
+                            <li style="color: white;">
+                                <a class="hover" href="{% url 'home' %}">Ana sayfa</a>
+                            </li>
+
+                            <br>
+                            <li style="color: white;">
+                                <a class="hover" href="{% url 'register_url' %}">Kayıt OL</a>
+                            </li>
+
+                            <br>
+                            <li style="color: white;">
+                                <a class="hover" href="{% url 'login_url' %}">Giriş</a>
+                            </li>
+
+                            {% endif %}
+
                         </ul>
                     </div>
                 </div>
@@ -36,3 +73,24 @@
         </span>
     </div>
 </nav>
+
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-success">
+                <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: white;">
+                    Hesaptan çıkış işlemi</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="color: black; font-weight: 700;">
+                Hesaptan çıkmak istediğinizden emin misiniz?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hayır</button>
+                <a type="button" href="{% url 'logout_url' %}" class="btn btn-danger" onclick="hesaptanCik()">Evet</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block js_file %} <script src="{% static 'js/home.js' %}"></script> {% endblock %}

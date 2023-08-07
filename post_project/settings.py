@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ["127.0.0.1", ".pythonanywhere.com"]
 # Application definition
 
 INSTALLED_APPS = [
+    "account",
     "post_blog",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -125,3 +126,7 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
