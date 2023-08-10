@@ -16,6 +16,10 @@
 <div class="container">
     <div class="row">
         <div class="col">
+            
+            {% if p_count %}
+            <p style="color: #28a745;">Toplam gönderi sayısı : {{p_count}}</p>
+            {% endif %}
 
             {% if post_model|length > 0 %}
             {% for model in post_model %}

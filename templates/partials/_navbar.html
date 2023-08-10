@@ -1,5 +1,6 @@
 {% load static %}
-{% block css_file %}<link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock %}
+{% block css_file %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock %}
 
 <nav class="navbar bg-success">
     <div class="container-fluid">
@@ -7,6 +8,7 @@
             <h1 style="color: white;"><img src="{% static 'image/post.png' %}" width="70">&nbsp;
                 Post App</h1>
         </span>
+
         <span class="navbar-brand mb-0 h1 ms-auto">
             <button class="btn btn-outline-light btn-lg" type="button" data-bs-toggle="offcanvas"
                 data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
@@ -21,10 +23,10 @@
                 </div>
                 <div class="offcanvas-body bg-dark">
                     <div>
+
+                        {% if user.is_authenticated %}
+
                         <ul>
-
-                            {% if user.is_authenticated %}
-
 
                             <h4 style="color: #dc3545; list-style: none; left: 25px; position: absolute; top: 70px;">
                                 Hoşgeldin {{ user.username }}
@@ -46,8 +48,18 @@
                             <li style="color: white;">
                                 <a class="hover" data-bs-target="#confirmModal" data-bs-toggle="modal">Hesaptan Çık</a>
                             </li>
+                            
+                        </ul>
 
-                            {% else %}
+                        <hr size="6" color="#dc3545">
+                        <form class="d-flex" role="search" method="get" action="{% url 'home' %}">
+                            <input class="form-control me-2" type="search" name="author" placeholder="kişiye göre arama">
+                            <button class="btn btn-outline-light" type="submit">Ara</button>
+                        </form>
+
+                        {% else %}
+
+                        <ul>
 
                             <br>
                             <li style="color: white;">
@@ -64,9 +76,8 @@
                                 <a class="hover" href="{% url 'login_url' %}">Giriş</a>
                             </li>
 
-                            {% endif %}
-
                         </ul>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -74,7 +85,8 @@
     </div>
 </nav>
 
-<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
+    data-bs-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header bg-success">
@@ -93,4 +105,5 @@
     </div>
 </div>
 
-{% block js_file %} <script src="{% static 'js/home.js' %}"></script> {% endblock %}
+{% block js_file %}
+<script src="{% static 'js/home.js' %}"></script> {% endblock %}
