@@ -1,9 +1,6 @@
-from typing import Any, Dict, Mapping, Optional, Type, Union
 from django import forms
-from django.core.files.base import File
-from django.db.models.base import Model
-from django.forms.utils import ErrorList
 from .models import post_model
+from django.contrib.auth.models import User
 
 
 class post_model_form(forms.ModelForm):
@@ -17,7 +14,4 @@ class post_model_form(forms.ModelForm):
 
     class Meta:
         model = post_model
-        fields = (
-            "title",
-            "text",
-        )
+        fields = ("title", "text")

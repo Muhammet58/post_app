@@ -1,15 +1,23 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import post_model
 from .forms import post_model_form
+from django.core.paginator import   Paginator
 
 
 def home_page(request):
     post_models = post_model.objects.all()
 
+    items_per_page = 4
+    paginator = Paginator(post_models, items_per_page)
+
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
+
     data = {
-        "post_model": post_models,
+        "post_model": page,
     }
     return render(request, 'post_blog/home.html', data)
+
 
 
 

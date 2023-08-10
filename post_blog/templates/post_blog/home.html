@@ -76,9 +76,23 @@
 
             {% endif %}
 
+            <div class="pagination">
+                {% if post_model.has_previous %}
+                <a class="btn btn-outline-light btn-lg previous" href="?page={{ post_model.previous_page_number }}">&lt
+                    Önceki</a>
+                {% endif %}
+        
+                <span class="current-page">{{ post_model.number }}</span>
+        
+                {% if post_model.has_next %}
+                <a class="btn btn-outline-light btn-lg next" href="?page={{ post_model.next_page_number }}">Sonraki &gt</a>
+                {% endif %}
+            </div>
+
         </div>
     </div>
 </div>
+
 
 {% block js_file %}
 <script src="{% static 'js/home.js' %}"></script> {% endblock %}

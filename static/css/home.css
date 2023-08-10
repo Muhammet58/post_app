@@ -17,3 +17,10 @@
     text-decoration: none;
     color: #28a745;
 }
+
+
+.pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
