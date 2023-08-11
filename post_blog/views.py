@@ -1,25 +1,45 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import post_model
 from .forms import post_model_form
-from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 
 
 def home_page(request):
     post_models = post_model.objects.all()
+    auth = request.GET.get("author")
+    sort_by_old = request.GET.get("sort_by_old")
+    sort_by_new = request.GET.get("sort_by_new")
+    sort_by_A_Z = request.GET.get('sort_by_A-Z')
+    sort_by_Z_A = request.GET.get('sort_by_Z-A')
 
-    if request.method == "GET":
-        auth = request.GET.get("author")
-        if auth:
-            posts = post_model.objects.filter(author__username__icontains=auth)
-            posts_count = posts.count()
-            return render(request, "post_blog/home.html", {'post_model':posts, "p_count":posts_count})
-
+    if auth:
+        posts = post_model.objects.filter(author__username__icontains=auth)
+        posts_count = posts.count()
+        return render(request, "post_blog/home.html", {'post_model':posts, "p_count":posts_count})
+    
+    if sort_by_old:
+        post_models = post_models.order_by("publish_date")
+        return render(request, "post_blog/home.html", {'post_model':post_models})
+    
+    if sort_by_new:
+        post_models = post_models.order_by("-publish_date")
+        return render(request, "post_blog/home.html", {"post_model":post_models})
+    
+    if sort_by_A_Z:
+        post_models = post_models.order_by("title")
+        return render(request, 'post_blog/home.html', {'post_model':post_models})
+    
+    if sort_by_Z_A:
+        post_models = post_models.order_by("-title")
+        return render(request, "post_blog/home.html", {"post_model":post_models})
+        
+         
     items_per_page = 4
     paginator = Paginator(post_models, items_per_page)
 
     page_number = request.GET.get("page")
     page = paginator.get_page(page_number)
+
 
     data = {
         "post_model": page,
@@ -27,7 +47,7 @@ def home_page(request):
     return render(request, "post_blog/home.html", data)
 
 
-def post_details(request, slug, id):
+def post_details(request, id, slug):
     post = post_model.objects.get(id=id)
     return render(
         request,
@@ -57,12 +77,12 @@ def create_post_view(request):
     )
 
 
-def edit_post(request, post_slug):
+def edit_post(request, id, post_slug):
     if not request.user.is_authenticated:
         return redirect("home")
 
     # post = get_object_or_404(post_model, id=post_slug)
-    post = post_model.objects.get(slug=post_slug)
+    post = post_model.objects.get(id=id)
 
     form = post_model_form(request.POST, instance=post)
     if form.is_valid():

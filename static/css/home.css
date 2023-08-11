@@ -11,11 +11,20 @@
 .hover {
     text-decoration: none;
     color: white;
+    transition: 0.5s ease-in-out;
 }
 
 .hover:hover {
-    text-decoration: none;
     color: #28a745;
+}
+
+.dashed {
+    border: 1px dashed white;
+    transition: 1.0s ease-in-out;
+}
+
+.dashed:hover {
+    border: 5px dashed #dc3545;
 }
 
 
@@ -23,4 +32,14 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.button_custom {
+    color: white;
+    text-decoration: none;
+    transition: 0.5s ease-in-out;
+}
+
+.button_custom:hover {
+    color: #28a745;
 }

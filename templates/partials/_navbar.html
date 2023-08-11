@@ -22,66 +22,105 @@
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body bg-dark">
-                    <div>
 
-                        {% if user.is_authenticated %}
+                    {% if user.is_authenticated %}
 
-                        <ul>
+                    <ul>
 
-                            <h4 style="color: #dc3545; list-style: none; left: 25px; position: absolute; top: 70px;">
-                                Hoşgeldin {{ user.username }}
-                            </h4>
+                        <h4 style="color: #dc3545; list-style: none; left: 25px; position: absolute; top: 70px;">
+                            Hoşgeldin {{ user.username }}
+                        </h4>
 
-                            <br>
-                            <br>
-                            <li style="color: white;">
-                                <a class="hover" href="{% url 'home' %}">Ana sayfa</a>
-                            </li>
+                        <br>
+                        <br>
+                        <li style="color: white;">
+                            <a class="hover" href="{% url 'home' %}">Ana sayfa</a>
+                        </li>
 
-                            <br>
-                            <li style="color: white;">
-                                <a class="hover" href="{% url 'create_post_url' %}">Post oluştur</a>
-                            </li>
+                        <br>
+                        <li style="color: white;">
+                            <a class="hover" href="{% url 'create_post_url' %}">Post oluştur</a>
+                        </li>
 
-                            <br>
+                        <br>
 
-                            <li style="color: white;">
-                                <a class="hover" data-bs-target="#confirmModal" data-bs-toggle="modal">Hesaptan Çık</a>
-                            </li>
-                            
-                        </ul>
+                        <li style="color: white;">
+                            <a class="hover" data-bs-target="#confirmModal" data-bs-toggle="modal">Hesaptan Çık</a>
+                        </li>
 
-                        <hr size="6" color="#dc3545">
-                        <form class="d-flex" role="search" method="get" action="{% url 'home' %}">
-                            <input class="form-control me-2" type="search" name="author" placeholder="kişiye göre arama">
-                            <button class="btn btn-outline-light" type="submit">Ara</button>
-                        </form>
+                    </ul>
 
-                        {% else %}
 
-                        <ul>
+                    {% if request.resolver_match.url_name == 'home' or request.GET.page %}
+                    <hr size="7" color="#dc3545">
+                    <form class="d-flex" role="search" method="get" action="{% url 'home' %}">
+                        <input class="form-control me-2 dashed" type="search" name="author"
+                            placeholder="kişiye göre arama">
+                        <button class="btn btn-outline-light" type="submit">Ara</button>
+                    </form>
+                    <hr size="7" color="#dc3545">
 
-                            <br>
-                            <li style="color: white;">
-                                <a class="hover" href="{% url 'home' %}">Ana sayfa</a>
-                            </li>
+                    <form method="get" action="{% url 'home' %}">
+                        <input type="hidden" name="sort_by_new" value="new">
+                        <button type="submit" class="btn btn-link button_custom">
+                            <i class="fa-solid fa-arrow-up-wide-short"></i>
+                            Tarihe göre en yeni
+                        </button> 
+                    </form>
 
-                            <br>
-                            <li style="color: white;">
-                                <a class="hover" href="{% url 'register_url' %}">Kayıt OL</a>
-                            </li>
+                    <form method="get" action="{% url 'home' %}">
+                        <input type="hidden" name="sort_by_old" value="old">
+                        <button type="submit" class="btn btn-link button_custom">
+                            <i class="fa-solid fa-arrow-down-wide-short"></i>
+                            Tarihe göre en eski
+                        </button>
+                    </form>
+                    
+                    <form method="get" action="{% url 'home' %}">
+                        <input type="hidden" name="sort_by_A-Z" value="A-Z">
+                        <button type="submit" class="btn btn-link button_custom">
+                            <i class="fa-solid fa-arrow-down-a-z"></i>
+                            Alfabetik sırala A-Z
+                        </button>
+                    </form>
+                     
+                    <form method="get" action="{% url 'home' %}">
+                        <input type="hidden" name="sort_by_Z-A" value="Z-A">
+                        <button type="submit" class="btn btn-link button_custom">
+                            <i class="fa-solid fa-arrow-up-z-a"></i>
+                            Alfabetik sırala Z-A
+                        </button>
+                    </form>
+                    {% endif %}
 
-                            <br>
-                            <li style="color: white;">
-                                <a class="hover" href="{% url 'login_url' %}">Giriş</a>
-                            </li>
 
-                        </ul>
-                        {% endif %}
-                    </div>
+
+
+                    {% else %}
+
+                    <ul>
+
+                        <br>
+                        <li style="color: white;">
+                            <a class="hover" href="{% url 'home' %}">Ana sayfa</a>
+                        </li>
+
+                        <br>
+                        <li style="color: white;">
+                            <a class="hover" href="{% url 'register_url' %}">Kayıt OL</a>
+                        </li>
+
+                        <br>
+                        <li style="color: white;">
+                            <a class="hover" href="{% url 'login_url' %}">Giriş</a>
+                        </li>
+
+                    </ul>
+                    {% endif %}
                 </div>
             </div>
-        </span>
+    </div>
+    </span>
     </div>
 </nav>
 

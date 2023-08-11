@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block css_file %}
-<link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock %}
+{% block css_file %}<link rel="stylesheet" href="{% static 'css/home.css' %}"> {% endblock %}
 
 {% block title %}Ana_Sayfa{% endblock %}
 
@@ -17,12 +16,15 @@
     <div class="row">
         <div class="col">
             
+            
+            {% if post_model|length > 0 %}
+
             {% if p_count %}
             <p style="color: #28a745;">Toplam gönderi sayısı : {{p_count}}</p>
             {% endif %}
 
-            {% if post_model|length > 0 %}
             {% for model in post_model %}
+
 
             <div class="card">
                 <div class="card-header"> {{ model.author }} kişisi tarafından gönderildi </div>
@@ -37,7 +39,7 @@
                         </form>
 
                         {% if user.is_authenticated and user == model.author %}
-                        <form action="{% url 'edit_post' model.slug %}" method="POST">
+                        <form action="{% url 'edit_post' model.id model.slug %}" method="POST">
                             {% csrf_token %}
                             <input class="btn btn-outline-success" type="submit" value="Güncelle">
                         </form>
@@ -98,6 +100,5 @@
 </div>
 
 
-{% block js_file %}
-<script src="{% static 'js/home.js' %}"></script> {% endblock %}
+{% block js_file %}<script src="{% static 'js/home.js' %}"></script> {% endblock %}
 {% endblock %}
